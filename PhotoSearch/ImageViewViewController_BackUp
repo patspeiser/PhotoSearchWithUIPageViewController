@@ -1,0 +1,87 @@
+//
+//  ImageViewViewController.swift
+//  PhotoSearch
+//
+//  Created by pat on 2/16/15.
+//  Copyright (c) 2015 patspeiser. All rights reserved.
+//
+
+// NOTE TO ME: Start looking into date ranges for image return. since there mare likely many days were a photo isn't taken.
+//Look into displaying multiple pictures on the view instead of just one.
+
+import UIKit
+import Photos
+
+class ImageViewViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    var pageIndex : Int = 0
+    var titleText : String = ""
+    var imageFile : String = ""
+    
+    var dateRangeToSearch: Int!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var date : NSDate!
+        
+        switch dateRangeToSearch{
+            case 3:
+                date = NSDate().dateByAddingTimeInterval(-60*60*24*90)
+                println("BLOCK 3")
+            case 6:
+                date = NSDate().dateByAddingTimeInterval(-60*60*24*180)
+                println("BlOCK 6")
+            case 12:
+                date = NSDate().dateByAddingTimeInterval(-60*60*24*365)
+                println("BLOCK 12")
+            default:
+                println("No date range sent.")
+    }
+        
+        //println(todaysDate)
+        println("DATE SET TO: \(date)")
+        
+        let photoManager: PHImageManager = PHImageManager.defaultManager()
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "creationDate > %@", date)
+        let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
+        
+        //println(images.count)
+        if (images.count>1){
+            for index in 0...images.count-1 {
+                photoManager.requestImageForAsset(images[index] as PHAsset,
+                    targetSize: PHImageManagerMaximumSize,
+                    //targetSize: CGSize(width: 200.0, height: 200.0),
+                    contentMode: .AspectFit, options: nil) {
+                        image, info in
+                        self.imageView.image = image
+                        println(images[index])
+                        println("TEST")
+                        println(index)
+                    }
+            }
+        } else {
+            println("No images found.")
+        }
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

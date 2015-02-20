@@ -13,6 +13,10 @@
 		43BB079C1A9170DB007A0501 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43BB079B1A9170DB007A0501 /* Images.xcassets */; };
 		43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43BB079D1A9170DB007A0501 /* LaunchScreen.xib */; };
 		43BB07AB1A9170DB007A0501 /* PhotoSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */; };
+		43BB07B91A92D066007A0501 /* ImageViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07B81A92D066007A0501 /* ImageViewViewController.swift */; };
+		43BB07BB1A952610007A0501 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07BA1A952610007A0501 /* PageView.swift */; };
+		43BB081F1A953A32007A0501 /* ViewController_BackUp in Resources */ = {isa = PBXBuildFile; fileRef = 43BB081E1A953A32007A0501 /* ViewController_BackUp */; };
+		43BB08211A953E23007A0501 /* ImageViewViewController_BackUp in Resources */ = {isa = PBXBuildFile; fileRef = 43BB08201A953E23007A0501 /* ImageViewViewController_BackUp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		43BB07A41A9170DB007A0501 /* PhotoSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BB07A91A9170DB007A0501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchTests.swift; sourceTree = "<group>"; };
+		43BB07B81A92D066007A0501 /* ImageViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewViewController.swift; sourceTree = "<group>"; };
+		43BB07BA1A952610007A0501 /* PageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		43BB081E1A953A32007A0501 /* ViewController_BackUp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ViewController_BackUp; sourceTree = "<group>"; };
+		43BB08201A953E23007A0501 /* ImageViewViewController_BackUp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ImageViewViewController_BackUp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +85,15 @@
 		43BB07911A9170DB007A0501 /* PhotoSearch */ = {
 			isa = PBXGroup;
 			children = (
+				43BB07981A9170DB007A0501 /* Main.storyboard */,
 				43BB07941A9170DB007A0501 /* AppDelegate.swift */,
 				43BB07961A9170DB007A0501 /* ViewController.swift */,
-				43BB07981A9170DB007A0501 /* Main.storyboard */,
+				43BB07B81A92D066007A0501 /* ImageViewViewController.swift */,
 				43BB079B1A9170DB007A0501 /* Images.xcassets */,
 				43BB079D1A9170DB007A0501 /* LaunchScreen.xib */,
+				43BB07BA1A952610007A0501 /* PageView.swift */,
+				43BB081E1A953A32007A0501 /* ViewController_BackUp */,
+				43BB08201A953E23007A0501 /* ImageViewViewController_BackUp */,
 				43BB07921A9170DB007A0501 /* Supporting Files */,
 			);
 			path = PhotoSearch;
@@ -193,6 +205,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BB079A1A9170DB007A0501 /* Main.storyboard in Resources */,
+				43BB081F1A953A32007A0501 /* ViewController_BackUp in Resources */,
+				43BB08211A953E23007A0501 /* ImageViewViewController_BackUp in Resources */,
 				43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */,
 				43BB079C1A9170DB007A0501 /* Images.xcassets in Resources */,
 			);
@@ -213,7 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BB07971A9170DB007A0501 /* ViewController.swift in Sources */,
+				43BB07BB1A952610007A0501 /* PageView.swift in Sources */,
 				43BB07951A9170DB007A0501 /* AppDelegate.swift in Sources */,
+				43BB07B91A92D066007A0501 /* ImageViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +423,7 @@
 				43BB07B01A9170DB007A0501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43BB07B11A9170DB007A0501 /* Build configuration list for PBXNativeTarget "PhotoSearchTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +432,7 @@
 				43BB07B31A9170DB007A0501 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

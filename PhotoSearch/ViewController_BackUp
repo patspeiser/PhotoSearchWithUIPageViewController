@@ -1,0 +1,73 @@
+//
+//  ViewController.swift
+//  PhotoSearch
+//
+//  Created by pat on 2/15/15.
+//  Copyright (c) 2015 patspeiser. All rights reserved.
+//
+
+import UIKit
+import Photos
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var threeMonths: UIButton!
+    @IBOutlet weak var sixMonths: UIButton!
+    @IBOutlet weak var oneYear: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+        if let segueID = segue.identifier {
+            println(segueID)
+            switch segueID {
+                case "threeMonths":
+                    println("Three months")
+                    let destinationViewController = segue.destinationViewController as ImageViewViewController
+                    destinationViewController.dateRangeToSearch = 3
+                case "sixMonths":
+                    println("six months")
+                    let destinationViewController = segue.destinationViewController as ImageViewViewController
+                    destinationViewController.dateRangeToSearch = 6
+                case "oneYear":
+                    println("One year")
+                    let destinationViewController = segue.destinationViewController as ImageViewViewController
+                    destinationViewController.dateRangeToSearch = 12
+                default:
+                    println("Unknown segue chosen.")
+            }
+        }
+    }
+}
+
+
+
+//println(todaysDate)
+//fetchOptions.predicate = NSPredicate(format: "creationDate = \(todaysDate)", argumentArray: nil)
+//fetchOptions.sortDescriptors = NSSortDescriptor(key: "creationDate", ascending: true)
+//let assets = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+//let asset = assets[0]
+//photoManager.requestImageForAsset(assets, targetSize: CGSize(width:100.0, height: 100.0), contentMode: .AspectFill, options:nil, resultHandler: { (result, info) -> Void in self.imageView.image = result })
+//NSPredicate()
+//fetchOptions.predicate = NSPredicate(format: "creationDate == \(todaysDate)", argumentArray: nil)
+
+
+/*
+if (segue.identifier == "threeMonths") {
+let destinationViewController = segue.destinationViewController as UIViewController
+
+
+} else if (segue.identifier == "sixMonths") {
+
+} else {
+
+}
+*/
