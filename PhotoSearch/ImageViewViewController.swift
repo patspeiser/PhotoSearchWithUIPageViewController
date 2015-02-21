@@ -19,6 +19,8 @@ class ImageViewViewController: UIViewController {
     let imageView: UIImageView!
     var pageIndex : Int!
     var date : NSDate!
+    //pageContentViewController.pageIndex = index
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

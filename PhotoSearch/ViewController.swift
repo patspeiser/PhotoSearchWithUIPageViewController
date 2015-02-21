@@ -13,7 +13,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     
     var pageViewController : UIPageViewController?
     var pageTitles : Array<String> = ["Three Months", "Six Months", "One Year"]
-    //var pageImages : UIImage?
     var currentIndex : Int = 0
     
     override func viewDidLoad() {
@@ -29,7 +28,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         addChildViewController(pageViewController!)
         view.addSubview(pageViewController!.view)
         pageViewController!.didMoveToParentViewController(self)
-        // Do any additional setup after loading the view, typically from a nib.
         
     }
     override func didReceiveMemoryWarning() {
@@ -38,6 +36,25 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
 
     // set up current, before, and after views
+    func viewControllerAtIndex(index: Int) -> ImageViewViewController?
+    {
+        println("Current Index Start \(index)")
+        if self.pageTitles.count == 0 || index >= self.pageTitles.count
+        {
+            return nil
+        }
+        // Create a new view controller and pass suitable data.
+        currentIndex = index
+        let pageContentViewController = ImageViewViewController()
+        //pageContentViewController.getDate()
+        pageContentViewController.titleText = pageTitles[index]
+        pageContentViewController.pageIndex = index
+        
+        
+        println("Current Index End \(index)\n")
+        return pageContentViewController
+    }
+    
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
     {
         var index: Int = (viewController as ImageViewViewController).pageIndex
@@ -71,24 +88,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         return viewControllerAtIndex(index)
     }
     
-    func viewControllerAtIndex(index: Int) -> ImageViewViewController?
-    {
-        println("Current Index Start \(index)")
-        if self.pageTitles.count == 0 || index >= self.pageTitles.count
-        {
-            return nil
-        }
-        // Create a new view controller and pass suitable data.
-        currentIndex = index
-        let pageContentViewController = ImageViewViewController()
-        //pageContentViewController.getDate()
-        pageContentViewController.titleText = pageTitles[index]
-        pageContentViewController.pageIndex = index
-        
-        
-        println("Current Index End \(index)\n")
-        return pageContentViewController
-    }
+    
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int
     {
         return self.pageTitles.count
