@@ -38,7 +38,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     // set up current, before, and after views
     func viewControllerAtIndex(index: Int) -> ImageViewViewController?
     {
-        println("Current Index Start \(index)")
+        //println("Current Index Start \(index)")
         if self.pageTitles.count == 0 || index >= self.pageTitles.count
         {
             return nil
@@ -46,33 +46,32 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         // Create a new view controller and pass suitable data.
         currentIndex = index
         let pageContentViewController = ImageViewViewController()
-        //pageContentViewController.getDate()
         pageContentViewController.titleText = pageTitles[index]
         pageContentViewController.pageIndex = index
         
         
-        println("Current Index End \(index)\n")
+        //println("Current Index End \(index)\n")
         return pageContentViewController
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
     {
         var index: Int = (viewController as ImageViewViewController).pageIndex
-        println("BEFORE Start \(index)")
+        //println("BEFORE Start \(index)")
         if (index == 0) || (index == NSNotFound) {
             return nil
         }
         
         index--
         
-        println("BEFORE End \(index)\n")
+        //println("BEFORE End \(index)\n")
        return viewControllerAtIndex(index)
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?
     {
         var index: Int = (viewController as ImageViewViewController).pageIndex
-        println("After Start \(index)")
+        //println("After Start \(index)")
         
         if index == NSNotFound {
             return nil
@@ -84,7 +83,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
             return nil
         }
         
-        println("After End \(index)\n")
+        //println("After End \(index)\n")
         return viewControllerAtIndex(index)
     }
     

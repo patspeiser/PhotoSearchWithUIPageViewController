@@ -18,12 +18,12 @@ class ImageViewViewController: UIViewController {
     var titleText : String = ""
     let imageView: UIImageView!
     var pageIndex : Int!
-    var date : NSDate!
-    //pageContentViewController.pageIndex = index
-    
-    
+    var startDate : NSDate!
+    var endDate: NSDate!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        //println("IMAGEVIEWVIEWCONTROLLER INDEX: \(pageIndex)")
         
         // set up view header label
         let label = UILabel(frame: CGRectMake(0, 0, view.frame.width, 200))
@@ -32,46 +32,56 @@ class ImageViewViewController: UIViewController {
         label.textAlignment = .Center
         view.addSubview(label)
         
-        
-        
         // get date using page index. this is used to get images
         getDate(pageIndex)
         
         // get images by date. these will be displayed on the view.
-        getImages(date)
+        getImages(startDate, endDate: endDate)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        println("APPEAR: \(self.pageIndex)");
     }
     
     // function to determine date
-    func getDate(pageIndex: Int) -> NSDate{
-        println("MADE IT TO getDate() FUNCTION!")
+    func getDate(pageIndex: Int) -> (NSDate, NSDate) {
+        //println("MADE IT TO getDate() FUNCTION!")
+        
         switch pageIndex{
         case 0:
-            date = NSDate().dateByAddingTimeInterval(-60*60*24*90)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*80)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*90)
         case 1:
-            date = NSDate().dateByAddingTimeInterval(-60*60*24*180)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*170)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*190)
         case 2:
-            date = NSDate().dateByAddingTimeInterval(-60*60*24*365)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*355)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*375)
         default:
-            date = NSDate()
+            startDate = NSDate()
+            endDate = NSDate()
         }
-        return date
+        return (startDate, endDate)
     }
 
     // get images using Date. return view.
-    func getImages(date: NSDate) -> UIImageView {
-        
+    func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
         
         //create view images display on
-        println("MADE IT TO getImages() FUNCTION!")
         let imageView = UIImageView(frame: CGRectMake(0, 200, view.frame.width, 200))
         
         
         // prep photo manager w/ fetch options. get images as PHAssets
         let photoManager: PHImageManager = PHImageManager.defaultManager()
         let fetchOptions: PHFetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "creationDate > %@", date)
+        fetchOptions.predicate = NSPredicate(format: "creationDate >= %@ && creationDate <= %@", startDate, endDate)
         let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
-        
+        // trying to load image into memory. must fix this
+        // read documents. just get meta data without getting image itself
+        println("START DATE \(startDate)")
+        println("END DATE \(endDate)")
+        println("IMAGE COUNT\(images.count)")
+        //println(fetchOptions)
         // if you get images loop through image assets to get image. attach to imageView.
         if (images.count>=1){
             for x in 0...images.count-1 {
@@ -80,9 +90,7 @@ class ImageViewViewController: UIViewController {
                     contentMode: .AspectFit, options: nil) {
                         image, info in
                         imageView.image = image
-                        println(imageView.image)
-                        
-                }
+                    }
             }
         } else {
             println("No images found.")
