@@ -72,61 +72,37 @@ class ImageViewViewController: UIViewController {
         return (startDate, endDate)
     }
 
-    
-    // USE THIS BLOCK UNTIL I GET THE MEMORY ISSUES RESOLVED
-    /*
-    func getDate(pageIndex: Int) -> (NSDate, NSDate) {
-        //println("MADE IT TO getDate() FUNCTION!")
-        
-        switch pageIndex{
-        case 0:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*10)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*15)
-        case 1:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*20)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*25)
-        case 2:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*30)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*35)
-        default:
-            startDate = NSDate()
-            endDate = NSDate()
-        }
-        return (startDate, endDate)
-    }
-    */
     // get images using Date. return view.
     func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
         
         //create view images display on)
-        let imageView = UIImageView(frame: CGRectMake(0, 0, view.frame.width, view.frame.height))
-        
+        let imageView = UIImageView(frame: CGRectMake(0, view.frame.maxY-(view.frame.width+100), view.frame.width, view.frame.width))
+        //let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
         
         // prep photo manager w/ fetch options. get images as PHAssets
         let photoManager: PHImageManager = PHImageManager.defaultManager()
         let fetchOptions: PHFetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "(creationDate >= %@) && (creationDate >= %@)", startDate, endDate)
         let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
-        
-        // trying to load image into memory. must fix this
-        // read documents. just get meta data without getting image itself
-        println("START DATE \(startDate)")
-        println("END DATE \(endDate)")
-        println("IMAGE COUNT\(images.count)")
-        //println(fetchOptions)
-        // if you get images loop through image assets to get image. attach to imageView.
+
+        // what to do when you get images. fetch image for asset and attach to imageview
         if (images.count>=1){
-            //for x in 0...images.count-1 {
-                photoManager.requestImageForAsset(images[0] as PHAsset,
-                    targetSize: PHImageManagerMaximumSize,
-                    contentMode: .AspectFill, options: nil) {
-                        result, info in
-                        //if result.size.width > 1000 && result.size.height > 1000 {
-                        println(result)
-                        imageView.image = result
-                        //}
-                    }
-            //}
+            
+            //get high quality image
+            let assetOptions = PHImageRequestOptions()
+            assetOptions.deliveryMode = .HighQualityFormat
+            
+            photoManager.requestImageForAsset(images[0] as PHAsset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .AspectFill, options: nil) {
+                    result, info in
+                    println("P gI: Image gotten. Image Size: \(result?.size)")
+                    //if result.size.width > 1000 && result.size.height > 1000 {
+                    println(result)
+                    imageView.image = result
+                    
+                    //}
+                }
         } else {
             println("No images found.")
         }
