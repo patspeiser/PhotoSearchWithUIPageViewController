@@ -24,11 +24,11 @@ class ImageViewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //println("IMAGEVIEWVIEWCONTROLLER INDEX: \(pageIndex)")
+        
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        println(statusBarHeight)
+        
         // set up view header label
-        let label = UILabel(frame: CGRectMake(0, statusBarHeight+25, view.frame.width, 25))
+        let label = UILabel(frame: CGRectMake(0, statusBarHeight+25, view.frame.width, 35))
         label.font = UIFont(name: label.font.fontName, size: 30)
         label.textColor = UIColor.whiteColor()
         label.text = titleText
@@ -57,14 +57,14 @@ class ImageViewViewController: UIViewController {
         
         switch pageIndex{
         case 0:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*80)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*90)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*89)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*91)
         case 1:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*170)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*190)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*179)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*181)
         case 2:
-            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*355)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*375)
+            startDate = NSDate().dateByAddingTimeInterval(-60*60*24*364)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*366)
         default:
             startDate = NSDate()
             endDate = NSDate()
@@ -76,7 +76,8 @@ class ImageViewViewController: UIViewController {
     func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
         
         //create view images display on)
-        let imageView = UIImageView(frame: CGRectMake(0, view.frame.maxY-(view.frame.width+100), view.frame.width, view.frame.width))
+        //let imageView = UIImageView(frame: CGRectMake(0, view.frame.maxY-(view.frame.width+100), view.frame.width, view.frame.width))
+        let imageView = UIImageView(frame: CGRectMake(0, view.frame.minY+100, view.frame.width, view.frame.width))
         //let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
         
         // prep photo manager w/ fetch options. get images as PHAssets
@@ -96,13 +97,9 @@ class ImageViewViewController: UIViewController {
                 targetSize: PHImageManagerMaximumSize,
                 contentMode: .AspectFill, options: nil) {
                     result, info in
-                    println("P gI: Image gotten. Image Size: \(result?.size)")
-                    //if result.size.width > 1000 && result.size.height > 1000 {
-                    println(result)
                     imageView.image = result
-                    
-                    //}
                 }
+            
         } else {
             println("No images found.")
         }

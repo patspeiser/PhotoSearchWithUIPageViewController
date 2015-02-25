@@ -12,11 +12,43 @@ import Photos
 class ViewController: UIViewController, UIPageViewControllerDataSource {
     
     var pageViewController : UIPageViewController?
-    var pageTitles : Array<String> = ["Three Months", "Six Months", "One Year"]
+    var pageTitles : Array<String> = ["Three Months Ago", "Six Months Ago", "One Year Ago"]
     var currentIndex : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        createUserInterface()
+        
+        /*if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
+        
+            createUserInterface()
+        
+        } else {
+            
+           PHPhotoLibrary.requestAuthorization(requestAuthorizationHandler)
+        
+        }
+*/
+    }
+    func requestAuthorizationHandler(status: PHAuthorizationStatus)
+    {
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized
+        {
+            executeInMainQueue({ self.createUserInterface() })
+
+        }
+        else
+        {
+            executeInMainQueue({ self.dismissViewControllerAnimated(true, completion: nil) })
+            let settingsPrompt = UIAlertController(title: "Authorization Required", message: "Enable access to photos?", preferredStyle: UIAlertControllerStyle.Alert)
+            settingsPrompt.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
+            settingsPrompt.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { alertAction -> Void in self.goToSettings() }))
+            presentViewController(settingsPrompt, animated: true, completion: nil)
+        }
+    }
+    
+    func createUserInterface() {
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
         
@@ -28,13 +60,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         addChildViewController(pageViewController!)
         view.addSubview(pageViewController!.view)
         pageViewController!.didMoveToParentViewController(self)
-        
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     // set up current, before, and after views
     func viewControllerAtIndex(index: Int) -> ImageViewViewController?
     {
@@ -91,5 +118,20 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     {
         return 0
     }
+    
+    func executeInMainQueue(function: () -> Void)
+    {
+        dispatch_async(dispatch_get_main_queue(), function)
+    }
+    
+    func goToSettings() {
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
 }
 
