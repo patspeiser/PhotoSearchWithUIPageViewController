@@ -20,7 +20,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         
         createUserInterface()
         
-        /*if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
         
             createUserInterface()
         
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
            PHPhotoLibrary.requestAuthorization(requestAuthorizationHandler)
         
         }
-*/
+
     }
     func requestAuthorizationHandler(status: PHAuthorizationStatus)
     {
