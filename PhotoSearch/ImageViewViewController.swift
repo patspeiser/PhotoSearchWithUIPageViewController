@@ -12,6 +12,7 @@
 import UIKit
 import Photos
 import MessageUI
+import MobileCoreServices
 
 class ImageViewViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
@@ -130,20 +131,24 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
         if imageView != nil {
             return imageView
         } else {
-            let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+            imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
             return imageView
         }
-        // return images and add the imageView to the main view.
-        //view.addSubview(imageView)
-        //return imageView
     }
+    
+    // need to get attachments working
+    // remmeber that there are different kinds of image shtat can be used
     
     @IBAction func sendMessage(sender: AnyObject) {
         var messageVC = MFMessageComposeViewController()
+       
+        var imageToText = self.imageView.image
+        var fileName = self.imageView.image
+        var fileType = [kUTTypeImage]
         
-        messageVC.body = "Hey remember this?";
-        //messageVC.recipients = ["Enter tel-nr"]
-        messageVC.messageComposeDelegate = self;
+        messageVC.body = "Hey remember this?"
+        messageVC.messageComposeDelegate = self
+        //messageVC.addAttachmentData(imageToText, fileType, "fileName here?")
         
         self.presentViewController(messageVC, animated: false, completion: nil)
     }
@@ -163,48 +168,6 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
             break;
         }
     }
-    /*
-    func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
-        
-        //property on UIImage view content mode
-        //potentially change how image gets drawn in the view
-        
-        // prep photo manager w/ fetch options. get images as PHAssets
-        let photoManager: PHImageManager = PHImageManager.defaultManager()
-        let fetchOptions: PHFetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "(creationDate >= %@) && (creationDate >= %@)", startDate, endDate)
-        let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
-
-        // what to do when you get images. fetch image for asset and attach to imageview
-        if (images.count>=1){
-            
-            //get high quality image
-            let assetOptions = PHImageRequestOptions()
-            assetOptions.deliveryMode = .HighQualityFormat
-            
-            photoManager.requestImageForAsset(images[0] as PHAsset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .AspectFill, options: nil) {
-                    result, info in
-                    self.imageView.image = result
-                    
-                    
-                }
-            
-        } else {
-            println("No images found.")
-        }
-        if imageView != nil {
-            return imageView
-        } else {
-            let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
-            return imageView
-        }
-        // return images and add the imageView to the main view.
-        //view.addSubview(imageView)
-        //return imageView
-    }
-*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
