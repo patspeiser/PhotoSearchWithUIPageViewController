@@ -11,29 +11,29 @@
 
 import UIKit
 import Photos
+import MessageUI
 
-class ImageViewViewController: UIViewController {
+class ImageViewViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
-    //@IBOutlet weak var imageView: UIImageView!
-    var titleText : String = ""
-    let imageView: UIImageView!
+    
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var textButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+
+    var titleText : String!
+    //let imageView: UIImageView!
     var pageIndex : Int!
     var startDate : NSDate!
     var endDate: NSDate!
 
+    //move label to storyboard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("viewdidload on imageview")
+        monthLabel.text = titleText
         
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        
-        // set up view header label
-        let label = UILabel(frame: CGRectMake(0, statusBarHeight+25, view.frame.width, 35))
-        label.font = UIFont(name: label.font.fontName, size: 30)
-        label.textColor = UIColor.whiteColor()
-        label.text = titleText
-        label.textAlignment = .Center
-        
+        //setUpUserInterface()
         
         // get date using page index. this is used to get images
         getDate(pageIndex)
@@ -42,12 +42,13 @@ class ImageViewViewController: UIViewController {
         getImages(startDate, endDate: endDate)
         
         // add label overtop
-        view.addSubview(label)
+        //view.addSubview(label)
     }
     
     
+    
     override func viewDidAppear(animated: Bool) {
-        println("APPEAR: \(self.pageIndex)");
+        println("APPEAR: \(self.pageIndex)\n");
     }
     
     // function to determine date
@@ -73,12 +74,100 @@ class ImageViewViewController: UIViewController {
     }
 
     // get images using Date. return view.
+    
     func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
         
-        //create view images display on)
-        //let imageView = UIImageView(frame: CGRectMake(0, view.frame.maxY-(view.frame.width+100), view.frame.width, view.frame.width))
-        let imageView = UIImageView(frame: CGRectMake(0, view.frame.minY+100, view.frame.width, view.frame.width))
-        //let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+        //property on UIImage view content mode
+        //potentially change how image gets drawn in the view
+        
+        // prep photo manager w/ fetch options. get images as PHAssets
+        let photoManager: PHImageManager = PHImageManager.defaultManager()
+        let fetchOptions: PHFetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "(creationDate >= %@) && (creationDate >= %@)", startDate, endDate)
+        let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
+        
+        // what to do when you get images. fetch image for asset and attach to imageview
+        if (images.count>=1){
+            
+            //get high quality image
+            let assetOptions = PHImageRequestOptions()
+            assetOptions.deliveryMode = .HighQualityFormat
+            
+            photoManager.requestImageForAsset(images[0] as PHAsset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .AspectFill, options: nil) {
+                    result, info in
+                    self.imageView.image = result
+                    
+                    let originalImage = result
+                    let targetWidth = self.imageView.frame.size.width
+                    let targetHeight = self.imageView.frame.size.height
+                    let originalWidth = originalImage?.size.width
+                    let originalHeight = originalImage?.size.height
+                    var adjustmentFactor = targetWidth / originalWidth!
+                    if targetHeight / originalHeight! < adjustmentFactor {
+                        
+                        adjustmentFactor = targetHeight / originalHeight!
+                        
+                    }
+                    
+                    let adjustedHeight = originalHeight! * adjustmentFactor
+                    let adjustedWidth = originalWidth! * adjustmentFactor
+                    let adjustedSize = CGSizeMake(adjustedWidth, adjustedHeight)
+                    
+                    UIGraphicsBeginImageContext(adjustedSize)
+                    originalImage?.drawInRect(CGRectMake(0,0,adjustedWidth, adjustedHeight))
+                    let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+                    
+                    UIGraphicsEndImageContext()
+                
+                    self.imageView.image = newImage
+                }
+            
+        } else {
+            println("No images found.")
+        }
+        if imageView != nil {
+            return imageView
+        } else {
+            let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+            return imageView
+        }
+        // return images and add the imageView to the main view.
+        //view.addSubview(imageView)
+        //return imageView
+    }
+    
+    @IBAction func sendMessage(sender: AnyObject) {
+        var messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = "Hey remember this?";
+        //messageVC.recipients = ["Enter tel-nr"]
+        messageVC.messageComposeDelegate = self;
+        
+        self.presentViewController(messageVC, animated: false, completion: nil)
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController!, didFinishWithResult result: MessageComposeResult) {
+        switch (result.value) {
+        case MessageComposeResultCancelled.value:
+            println("Message was cancelled")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultFailed.value:
+            println("Message failed")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        case MessageComposeResultSent.value:
+            println("Message was sent")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            break;
+        }
+    }
+    /*
+    func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
+        
+        //property on UIImage view content mode
+        //potentially change how image gets drawn in the view
         
         // prep photo manager w/ fetch options. get images as PHAssets
         let photoManager: PHImageManager = PHImageManager.defaultManager()
@@ -97,17 +186,25 @@ class ImageViewViewController: UIViewController {
                 targetSize: PHImageManagerMaximumSize,
                 contentMode: .AspectFill, options: nil) {
                     result, info in
-                    imageView.image = result
+                    self.imageView.image = result
+                    
+                    
                 }
             
         } else {
             println("No images found.")
         }
+        if imageView != nil {
+            return imageView
+        } else {
+            let imageView = UIImageView(frame: CGRectMake(0, 0, 0, 0))
+            return imageView
+        }
         // return images and add the imageView to the main view.
-        view.addSubview(imageView)
-        return imageView
+        //view.addSubview(imageView)
+        //return imageView
     }
-
+*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

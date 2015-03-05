@@ -11,14 +11,18 @@ import Photos
 
 class ViewController: UIViewController, UIPageViewControllerDataSource {
     
+    // check for not determined status on phauthorizationstatus
+    
     var pageViewController : UIPageViewController?
     var pageTitles : Array<String> = ["Three Months Ago", "Six Months Ago", "One Year Ago"]
     var currentIndex : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("viewdidload on viewcontroller")
         
-        createUserInterface()
+        //createUserInterface()
+        
         
         if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
         
@@ -49,10 +53,12 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func createUserInterface() {
+        println("createuserinterface")
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
         
         let startingViewController: ImageViewViewController = viewControllerAtIndex(0)!
+        //let startingViewController: ImageViewViewController = 
         let viewControllers: NSArray = [startingViewController]
         pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
         pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
@@ -71,7 +77,9 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         }
         // Create a new view controller and pass suitable data.
         currentIndex = index
-        let pageContentViewController = ImageViewViewController()
+        //let pageContentViewController = ImageViewViewController()
+        
+        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ImageViewViewController") as ImageViewViewController
         pageContentViewController.titleText = pageTitles[index]
         pageContentViewController.pageIndex = index
     
