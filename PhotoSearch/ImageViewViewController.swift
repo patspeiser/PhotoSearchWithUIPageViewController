@@ -143,12 +143,14 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
         var messageVC = MFMessageComposeViewController()
        
         var imageToText = self.imageView.image
+        var imageData = UIImageJPEGRepresentation(imageToText, 1.0)
         var fileName = self.imageView.image
-        var fileType = [kUTTypeImage]
+        var fileType = kUTTypeJPEG
         
         messageVC.body = "Hey remember this?"
         messageVC.messageComposeDelegate = self
         //messageVC.addAttachmentData(imageToText, fileType, "fileName here?")
+        messageVC.addAttachmentData(imageData, typeIdentifier: fileType, filename: "myAwesomeImage.jpeg")
         
         self.presentViewController(messageVC, animated: false, completion: nil)
     }

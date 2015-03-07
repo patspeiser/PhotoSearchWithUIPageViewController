@@ -52,6 +52,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         }
     }
     
+    // send project 
+    
     func createUserInterface() {
         println("createuserinterface")
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -61,7 +63,8 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         //let startingViewController: ImageViewViewController = 
         let viewControllers: NSArray = [startingViewController]
         pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
-        pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+        //pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+        //pageViewController?.
         
         addChildViewController(pageViewController!)
         view.addSubview(pageViewController!.view)
@@ -71,6 +74,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     // set up current, before, and after views
     func viewControllerAtIndex(index: Int) -> ImageViewViewController?
     {
+        println("swiped?")
         if self.pageTitles.count == 0 || index >= self.pageTitles.count
         {
             return nil
