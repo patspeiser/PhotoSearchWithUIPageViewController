@@ -14,6 +14,7 @@
 		43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43BB079D1A9170DB007A0501 /* LaunchScreen.xib */; };
 		43BB07AB1A9170DB007A0501 /* PhotoSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */; };
 		43BB07B91A92D066007A0501 /* ImageViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07B81A92D066007A0501 /* ImageViewViewController.swift */; };
+		43D5947E1AAD2F190008B1B2 /* NoImages.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 43D5947D1AAD2F190008B1B2 /* NoImages.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		43BB07A91A9170DB007A0501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchTests.swift; sourceTree = "<group>"; };
 		43BB07B81A92D066007A0501 /* ImageViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewViewController.swift; sourceTree = "<group>"; };
+		43D5947D1AAD2F190008B1B2 /* NoImages.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NoImages.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				43BB07981A9170DB007A0501 /* Main.storyboard */,
 				43BB07941A9170DB007A0501 /* AppDelegate.swift */,
 				43BB07961A9170DB007A0501 /* ViewController.swift */,
+				43D5947D1AAD2F190008B1B2 /* NoImages.JPG */,
 				43BB07B81A92D066007A0501 /* ImageViewViewController.swift */,
 				43BB079B1A9170DB007A0501 /* Images.xcassets */,
 				43BB079D1A9170DB007A0501 /* LaunchScreen.xib */,
@@ -199,6 +202,7 @@
 			files = (
 				43BB079A1A9170DB007A0501 /* Main.storyboard in Resources */,
 				43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */,
+				43D5947E1AAD2F190008B1B2 /* NoImages.JPG in Resources */,
 				43BB079C1A9170DB007A0501 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

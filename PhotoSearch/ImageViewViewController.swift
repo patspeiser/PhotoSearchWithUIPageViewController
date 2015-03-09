@@ -22,19 +22,13 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
     @IBOutlet weak var imageView: UIImageView!
 
     var titleText : String!
-    //let imageView: UIImageView!
     var pageIndex : Int!
     var startDate : NSDate!
     var endDate: NSDate!
 
-    //move label to storyboard
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("viewdidload on imageview")
         monthLabel.text = titleText
-        
-        //setUpUserInterface()
         
         // get date using page index. this is used to get images
         getDate(pageIndex)
@@ -42,8 +36,6 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
         // get images by date. these will be displayed on the view.
         getImages(startDate, endDate: endDate)
         
-        // add label overtop
-        //view.addSubview(label)
     }
     
     
@@ -55,7 +47,6 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
     // function to determine date
     
     func getDate(pageIndex: Int) -> (NSDate, NSDate) {
-        //println("MADE IT TO getDate() FUNCTION!")
         
         switch pageIndex{
         case 0:
@@ -71,20 +62,19 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
             startDate = NSDate()
             endDate = NSDate()
         }
+        println("START DATE: \(startDate)")
+        println("END DATE:  \(endDate)")
         return (startDate, endDate)
     }
 
     // get images using Date. return view.
     
     func getImages(startDate: NSDate, endDate: NSDate) -> UIImageView {
-        
-        //property on UIImage view content mode
-        //potentially change how image gets drawn in the view
-        
+
         // prep photo manager w/ fetch options. get images as PHAssets
         let photoManager: PHImageManager = PHImageManager.defaultManager()
         let fetchOptions: PHFetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "(creationDate >= %@) && (creationDate >= %@)", startDate, endDate)
+        fetchOptions.predicate = NSPredicate(format: "(creationDate <= %@) && (creationDate >= %@)", startDate, endDate)
         let images = PHAsset.fetchAssetsWithMediaType(.Image, options: fetchOptions)
         
         // what to do when you get images. fetch image for asset and attach to imageview
@@ -96,13 +86,14 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
             
             photoManager.requestImageForAsset(images[0] as PHAsset,
                 targetSize: PHImageManagerMaximumSize,
-                contentMode: .AspectFill, options: nil) {
+                contentMode: .AspectFit, options: nil) {
                     result, info in
-                    self.imageView.image = result
+                    println(images[0])
+                    //self.imageView.image = result
                     
                     let originalImage = result
-                    let targetWidth = self.imageView.frame.size.width
-                    let targetHeight = self.imageView.frame.size.height
+                    let targetWidth = self.view.frame.size.width
+                    let targetHeight = self.view.frame.size.height
                     let originalWidth = originalImage?.size.width
                     let originalHeight = originalImage?.size.height
                     var adjustmentFactor = targetWidth / originalWidth!
@@ -126,7 +117,34 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
                 }
             
         } else {
-            println("No images found.")
+           // println("No images found.")
+            
+            let originalImage = UIImage(named:"NoImages.JPG")
+            let targetWidth = self.view.frame.size.width
+            let targetHeight = self.view.frame.size.height
+            let originalWidth = originalImage?.size.width
+            let originalHeight = originalImage?.size.height
+            var adjustmentFactor = targetWidth / originalWidth!
+            if targetHeight / originalHeight! < adjustmentFactor {
+                
+                adjustmentFactor = targetHeight / originalHeight!
+                
+            }
+            
+            let adjustedHeight = originalHeight! * adjustmentFactor
+            let adjustedWidth = originalWidth! * adjustmentFactor
+            let adjustedSize = CGSizeMake(adjustedWidth, adjustedHeight)
+            
+            UIGraphicsBeginImageContext(adjustedSize)
+            originalImage?.drawInRect(CGRectMake(0,0,adjustedWidth, adjustedHeight))
+            let newNoImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            self.imageView.image = newNoImage
+            
+            
+            
         }
         if imageView != nil {
             return imageView

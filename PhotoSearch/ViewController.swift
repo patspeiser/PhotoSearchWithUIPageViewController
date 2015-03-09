@@ -52,7 +52,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         }
     }
     
-    // send project 
+    // send project
     
     func createUserInterface() {
         println("createuserinterface")
@@ -60,7 +60,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         pageViewController!.dataSource = self
         
         let startingViewController: ImageViewViewController = viewControllerAtIndex(0)!
-        //let startingViewController: ImageViewViewController = 
         let viewControllers: NSArray = [startingViewController]
         pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: true, completion: nil)
         //pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
