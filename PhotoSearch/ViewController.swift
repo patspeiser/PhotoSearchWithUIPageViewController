@@ -28,11 +28,11 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         
             createUserInterface()
         
-        } else if PHPhotoLibrary.authorizationStatus() == .NotDetermined {
+        } /*else if PHPhotoLibrary.authorizationStatus() == .NotDetermined {
         
             PHPhotoLibrary.requestAuthorization({(status) -> Void in })
             
-        } else {
+        } */else {
             
            PHPhotoLibrary.requestAuthorization(requestAuthorizationHandler)
         

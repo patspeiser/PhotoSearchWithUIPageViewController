@@ -11,10 +11,10 @@
 		43BB07971A9170DB007A0501 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07961A9170DB007A0501 /* ViewController.swift */; };
 		43BB079A1A9170DB007A0501 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43BB07981A9170DB007A0501 /* Main.storyboard */; };
 		43BB079C1A9170DB007A0501 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43BB079B1A9170DB007A0501 /* Images.xcassets */; };
-		43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43BB079D1A9170DB007A0501 /* LaunchScreen.xib */; };
 		43BB07AB1A9170DB007A0501 /* PhotoSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */; };
 		43BB07B91A92D066007A0501 /* ImageViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BB07B81A92D066007A0501 /* ImageViewViewController.swift */; };
 		43D5947E1AAD2F190008B1B2 /* NoImages.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 43D5947D1AAD2F190008B1B2 /* NoImages.JPG */; };
+		43D594C41AB388720008B1B2 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D594C31AB388720008B1B2 /* Launch Screen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +34,12 @@
 		43BB07961A9170DB007A0501 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		43BB07991A9170DB007A0501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43BB079B1A9170DB007A0501 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		43BB079E1A9170DB007A0501 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		43BB07A41A9170DB007A0501 /* PhotoSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BB07A91A9170DB007A0501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BB07AA1A9170DB007A0501 /* PhotoSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSearchTests.swift; sourceTree = "<group>"; };
 		43BB07B81A92D066007A0501 /* ImageViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewViewController.swift; sourceTree = "<group>"; };
 		43D5947D1AAD2F190008B1B2 /* NoImages.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NoImages.JPG; sourceTree = "<group>"; };
+		43D594C31AB388720008B1B2 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 				43BB07B81A92D066007A0501 /* ImageViewViewController.swift */,
 				43D5947D1AAD2F190008B1B2 /* NoImages.JPG */,
 				43BB079B1A9170DB007A0501 /* Images.xcassets */,
-				43BB079D1A9170DB007A0501 /* LaunchScreen.xib */,
+				43D594C31AB388720008B1B2 /* Launch Screen.xib */,
 				43BB07921A9170DB007A0501 /* Supporting Files */,
 			);
 			path = PhotoSearch;
@@ -176,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 43BB078A1A9170DB007A0501 /* Build configuration list for PBXProject "PhotoSearch" */;
+			buildConfigurationList = 43BB078A1A9170DB007A0501 /* Build configuration list for PBXProject "HeyRememberThis?" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -201,7 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BB079A1A9170DB007A0501 /* Main.storyboard in Resources */,
-				43BB079F1A9170DB007A0501 /* LaunchScreen.xib in Resources */,
+				43D594C41AB388720008B1B2 /* Launch Screen.xib in Resources */,
 				43D5947E1AAD2F190008B1B2 /* NoImages.JPG in Resources */,
 				43BB079C1A9170DB007A0501 /* Images.xcassets in Resources */,
 			);
@@ -252,14 +252,6 @@
 				43BB07991A9170DB007A0501 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		43BB079D1A9170DB007A0501 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BB079E1A9170DB007A0501 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -348,6 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhotoSearch/Info.plist;
@@ -362,6 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PhotoSearch/Info.plist;
@@ -415,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		43BB078A1A9170DB007A0501 /* Build configuration list for PBXProject "PhotoSearch" */ = {
+		43BB078A1A9170DB007A0501 /* Build configuration list for PBXProject "HeyRememberThis?" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				43BB07AC1A9170DB007A0501 /* Debug */,
