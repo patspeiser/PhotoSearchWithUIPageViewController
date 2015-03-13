@@ -24,10 +24,14 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
         //createUserInterface()
         
         
-        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.Authorized {
+        if PHPhotoLibrary.authorizationStatus() == .Authorized {
         
             createUserInterface()
         
+        } else if PHPhotoLibrary.authorizationStatus() == .NotDetermined {
+        
+            PHPhotoLibrary.requestAuthorization({(status) -> Void in })
+            
         } else {
             
            PHPhotoLibrary.requestAuthorization(requestAuthorizationHandler)

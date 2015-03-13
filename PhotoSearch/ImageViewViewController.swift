@@ -51,13 +51,13 @@ class ImageViewViewController: UIViewController, MFMessageComposeViewControllerD
         switch pageIndex{
         case 0:
             startDate = NSDate().dateByAddingTimeInterval(-60*60*24*89)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*91)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*90)
         case 1:
             startDate = NSDate().dateByAddingTimeInterval(-60*60*24*179)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*181)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*180)
         case 2:
             startDate = NSDate().dateByAddingTimeInterval(-60*60*24*364)
-            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*366)
+            endDate = NSDate().dateByAddingTimeInterval(-60*60*24*365)
         default:
             startDate = NSDate()
             endDate = NSDate()
