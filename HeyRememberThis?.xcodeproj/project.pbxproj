@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		43BB078F1A9170DB007A0501 /* PhotoSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43BB078F1A9170DB007A0501 /* HeyRememberThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeyRememberThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BB07931A9170DB007A0501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43BB07941A9170DB007A0501 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43BB07961A9170DB007A0501 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		43BB07901A9170DB007A0501 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				43BB078F1A9170DB007A0501 /* PhotoSearch.app */,
+				43BB078F1A9170DB007A0501 /* HeyRememberThis.app */,
 				43BB07A41A9170DB007A0501 /* PhotoSearchTests.xctest */,
 			);
 			name = Products;
@@ -135,7 +135,7 @@
 			);
 			name = PhotoSearch;
 			productName = PhotoSearch;
-			productReference = 43BB078F1A9170DB007A0501 /* PhotoSearch.app */;
+			productReference = 43BB078F1A9170DB007A0501 /* HeyRememberThis.app */;
 			productType = "com.apple.product-type.application";
 		};
 		43BB07A31A9170DB007A0501 /* PhotoSearchTests */ = {
@@ -346,7 +346,7 @@
 				INFOPLIST_FILE = PhotoSearch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HeyRememberThis;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -361,7 +361,7 @@
 				INFOPLIST_FILE = PhotoSearch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HeyRememberThis;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
